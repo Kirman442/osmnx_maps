@@ -26,24 +26,26 @@ extension = "png"
 font_folder = "fonts"
 font_city = "CaviarDreams.ttf"
 font_notes = "BerlinSmallCaps.ttf"
+# image res
 dpi = 600
+# distance in metres from the geopoint of place
 dist = 2500
+# size of the figure/image, the larger the values, the larger the size
 figsize = (8, 8)
+
 # files paths
 if not os.path.exists(img_folder):
     os.makedirs(img_folder)
-fp_water = os.path.join(img_folder, city + f"_water_{dist}.{extension}")
-fp_roads = os.path.join(img_folder, city + f"_roads_{dist}.{extension}")
-fp_railroads = os.path.join(img_folder, city + f"_railroads_{dist}.{extension}")
-fp_buildings = os.path.join(img_folder, city + f"_buildings_{dist}.{extension}")
-fp_background = os.path.join(img_folder, city + f"_background.{extension}")
+fp_water = os.path.join(img_folder, city + f"_water.{extension}")
+fp_roads = os.path.join(img_folder, city + f"_roads.{extension}")
+fp_railroads = os.path.join(img_folder, city + f"_railroads.{extension}")
+fp_buildings = os.path.join(img_folder, city + f"_buildings.{extension}")
 # fp_result = os.path.join(img_folder, city + f"_finalImage_{dist}.{extension}") 
 
 # font paths
 fsity = os.path.join(font_folder, font_city)
 fnotes = os.path.join(font_folder, font_notes)
 crs = ('EPSG:4326')
-print(location.latitude-0.02, location.longitude)
 
 surface = ox.geocode_to_gdf(place)
 
@@ -97,7 +99,7 @@ print('Which map will be built? 1 - Boundary, 2 - Distance')
 #     gradient_position = int(input("Please type the matching gradient position's number: "))
 
 
-# quickly make a selection for test, uncomment the lines above to make a manual selection
+# quickly make a selection for test, uncomment the lines above to make a manual selection and comment lines below
 start_time = time.time()
 response = 2
 add_water = 1
@@ -179,8 +181,8 @@ def classify_roads (gdf_edges: 'gpd.GeoDataFrame') -> list:
             1: "#778899",   # dark
             2: "#ffffff",   # light blue
             3: "#a3bac8",   # Navy
-            4: '#df4546',   # Salmon  #df4546  - ea6969
-            5: '#FE9A2E'    # Dark Orange ff9326-?
+            4: '#df4546',   # Salmon
+            5: '#FE9A2E'    # Dark Orange 
         }
         
         background_color_mapping = {
@@ -275,7 +277,7 @@ if add_water == 1:
                 2: '#ffffff', # light blue
                 3: '#081e2b', # navy
                 4: '#77cad0', # Salmon
-                5: '#0a1d40'  # Dark Orange 524439  12254a
+                5: '#0a1d40'  # Dark Orange
                 }
         
     if color_palette:
@@ -292,7 +294,7 @@ if add_water == 1:
     
     get_footprint(extract_gdf, water_color, bbox=bbox, edge_color='w', edge_linewidth=0.08, filepath=fp_water)
 
-    print(f"plot water grap {(time.time() - start_time):.1f} seconds")
+    print(f"plot water graph {(time.time() - start_time):.1f} seconds")
 # # ----------------
 # # End Water Block
 
@@ -333,11 +335,11 @@ if add_railways == 1:
     image_paths.append(fp_railroads)
     cf = '["railway"~"rail|subway|tram|light_rail|railway|light_rail"]'
     railway_color_map = {
-                1: '#6C6A8560', # dark blue 3A485680
-                2: '#9ACFD960', # light blue B1BDC580
-                3: '#8BCDD960', # navy a3bac880
-                4: '#9E001860', # salmon df454680
-                5: '#ff932660'  # Dark Orange FE9A2E80   ff9326
+                1: '#6C6A8560', # dark blue 
+                2: '#9ACFD960', # light blue
+                3: '#8BCDD960', # navy 
+                4: '#9E001860', # salmon 
+                5: '#ff932660'  # Dark Orange
                 }
     if color_palette:
         railway_color = railway_color_map.get(color_palette, "#ffffff80")
@@ -385,9 +387,9 @@ coords = f"{lat} / {lon}"
 
 gradient_mapping = {
             1: [(86,115,132),120, 25], # dark blue
-            2: [(255, 255, 255),120, 20], # White blue
-            3: [(202, 247, 255),120, 20], # Navy
-            4: [(255, 255, 255),180, 20], # Salmon
+            2: [(255, 255, 255),120, 20], # light blue
+            3: [(202, 247, 255),120, 20], # navy
+            4: [(255, 255, 255),180, 20], # salmon
             5: [(254, 154, 46),120, 20]   # Dark Orange
             }
 if color_palette:
@@ -454,7 +456,7 @@ def add_inscription(image, city_name, coordinates, text_position):
     textcolor_mapping = {
                 1: ['#ABBFC899','#96A5B7', '#ffffff'], # dark blue
                 2: ['#ffffff99', '#6F8799', '#00000099'],   # light blue
-                3: ['#F2B5D199', '#d8d1d1', '#00000080'],   # Navy 877597, #B6BEEE
+                3: ['#F2B5D199', '#d8d1d1', '#00000080'],   # Navy
                 4: ['#6f2f4299', '#8E6431', '#ffffff'],  # Salmon 
                 5: ['#DFE0DF99', '#DFE0DF', '#ffffff']   # Dark Orange
                 }
@@ -544,7 +546,7 @@ def composite_images(base_image, image_with_inscription_path, save_path):
         
         # Save the result
         final_image.save(save_path)
-        print("Image saved successfully:", save_path)
+        print("Image saved successfully")
     
     except FileNotFoundError as e:
         print("Error: File not found:", e.filename)
