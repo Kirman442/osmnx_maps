@@ -406,7 +406,7 @@ def create_gradient_mask(width, height, start_color = None, start_alpha = None, 
     draw = ImageDraw.Draw(mask)
 
     # Calculate the height of the gradient mask
-    gradient_height = int(gradient_percentage / 100 * height)
+    gradient_height = int(gradient_percentage / 150 * height)
     
     if gradient_position == 1:
         # Draw a gradient from white to transparent starting from the top
