@@ -59,8 +59,8 @@ image_paths = [fp_roads]
 # ------------
 
 # dict to make output file final image
-responses = {'response': 0, 'add_water': 0, 'add_buildings': 0,
-             'add_railways': 0, 'color_palette': 0, 'gradient_position': 0}
+responses = {'response': 2, 'add_water': 1, 'add_buildings': 0,
+             'add_railways': 0, 'color_palette': 1, 'gradient_position': 2}
 
 print('Which map will be built? 1 - Boundary, 2 - Distance')
 
@@ -110,7 +110,8 @@ gradient_position = 2
 
 #  Compose the path to the output file with the input data
 for key in responses.keys():
-    responses[key]=globals()[key]
+    if key in globals():
+        responses[key]=globals()[key]
 if response == 2:
     responses['dist'] = dist
 
