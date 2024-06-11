@@ -29,7 +29,7 @@ font_notes = "BerlinSmallCaps.ttf"
 # image res
 dpi = 600
 # distance in metres from the geopoint of place
-dist = 2500
+dist = 12500
 # size of the figure/image, the larger the values, the larger the size
 figsize = (8, 8)
 
@@ -68,16 +68,6 @@ print('Which map will be built? 1 - Boundary, 2 - Distance')
 # while response not in {1, 2}:
 #     response = int(input("Please enter 1 or 2: "))
 
-# print('Choose color palette: 1 - Dark, 2 - Light blue, 3 - Navy, 4 - Salmon, 5 - Dark Orange')
-# color_palette  = None
-# while color_palette not in {1, 2, 3, 4, 5}:
-#     color_palette = int(input("Please type the matching number: "))
-
-# print('Add Roads?: 1 - Yes, 0 - No')
-# add_roads = None
-# while add_roads not in {0, 1}:
-#     add_roads = int(input("Please type the matching number: "))
-
 # print('Add Water?: 1 - Yes, 0 - No')
 # add_water = None
 # while add_water not in {0, 1}:
@@ -93,6 +83,11 @@ print('Which map will be built? 1 - Boundary, 2 - Distance')
 # while add_railways not in {0, 1}:
 #     add_railways = int(input("Please type the matching number: "))
 
+# print('Choose color palette: 1 - Dark, 2 - Light blue, 3 - Navy, 4 - Salmon, 5 - Dark Orange')
+# color_palette  = None
+# while color_palette not in {1, 2, 3, 4, 5}:
+#     color_palette = int(input("Please type the matching number: "))
+
 # print('Choose gradient: 1 - From top, 2 - From bottom, 3 - None')
 # gradient_position = None
 # while gradient_position not in {1, 2, 3}:
@@ -103,9 +98,9 @@ print('Which map will be built? 1 - Boundary, 2 - Distance')
 start_time = time.time()
 response = 2
 add_water = 1
-add_buildings = 0
+add_buildings = 1
 add_railways = 0
-color_palette = 3
+color_palette = 1
 gradient_position = 2
 
 #  Compose the path to the output file with the input data
